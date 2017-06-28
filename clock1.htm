@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html style="height: 100%">
+<head>
+    <meta charset="UTF-8">  
+    <title>clock</title>
+    <style>
+        div{
+            margin : auto auto;
+            height : 100%;
+            width : 100%;
+        }
+        canvas{
+            margin : auto auto;
+        }
+    </style>
+</head>
+<body style="height: 90%">
+    <div id="div1">
+        <canvas id="canvas1">
+            你的浏览器居然不支持Canvas？！赶快换一个吧！！   
+        </canvas>
+    </div>
+    <script type="text/javascript">
+        var div1 = document.getElementById('div1');
+        var canvas1 = document.getElementById('canvas1');
+        var ctx = canvas1.getContext('2d');
+        var xm = div1.offsetWidth;
+        var ym = div1.offsetHeight;
+        canvas1.width = xm;
+        canvas1.height = ym;
+        ctx.translate(xm/2,ym/2);
+        var r = Math.min(xm,ym)/2;
+        var myDate = new Date();
+        
+       
+
+        function draw1(){
+            myDate = new Date();
+            console.log(myDate);
+            ctx.clearRect(-canvas1.width/2,-canvas1.height/2,canvas1.width,canvas1.height);
+
+            ctx.beginPath();
+            ctx.lineWidth="6";
+            ctx.strokeStyle="#000";
+            ctx.arc(0,0,r,0,Math.PI*2,true);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.lineWidth="1";
+            ctx.strokeStyle="#f00";
+            ctx.arc(0,0,r/12,0,Math.PI*2,true);
+            ctx.fillStyle="red";
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.rotate(2*Math.PI * myDate.getSeconds() / 60);
+            ctx.strokeStyle="#000";
+            ctx.rect(-r/100,-r/1.02,r/50,r/1.02);
+            ctx.fillStyle="black";
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.rotate(2*Math.PI * myDate.getMinutes() / 60 - 2*Math.PI * myDate.getSeconds() / 60);
+            ctx.strokeStyle="#333";
+            ctx.rect(-r/30,-r/1.2,r/15,r/1.2);
+            ctx.fillStyle="#333";
+            ctx.fill();
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.rotate(2*Math.PI * myDate.getHours() / 12 - 2*Math.PI * myDate.getMinutes() / 60);
+            ctx.strokeStyle="#666";
+            ctx.rect(-r/20,-r/3,r/10,r/3);
+            ctx.fillStyle="#666";
+            ctx.fill();
+            ctx.stroke();
+
+            
+            ctx.rotate(- 2*Math.PI * myDate.getHours() / 12 );
+        }
+
+
+        
+        setInterval("draw1()",1000);
+
+    </script>
+
+</body>
+</html>
