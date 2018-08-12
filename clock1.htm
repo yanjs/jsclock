@@ -1,23 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html style="height: 100%">
 <head>
-    <meta charset="UTF-8">  
+    <meta charset="UTF-8" />
     <title>clock</title>
     <style>
-        div{
-            margin : auto auto;
-            height : 100%;
-            width : 100%;
-        };
-        canvas{
-            margin : auto auto;
-        };
+        div {
+            margin: auto auto;
+            height: 100%;
+            width: 100%;
+        }
+
+        ;
+        canvas {
+            margin: auto auto;
+        }
+
+        ;
     </style>
 </head>
 <body style="height: 90%">
     <div id="div1">
         <canvas id="canvas1">
-            你的浏览器居然不支持Canvas？！赶快换一个吧！！   
+            你的浏览器居然不支持Canvas？！赶快换一个吧！！
         </canvas>
     </div>
     <script type="text/javascript">
@@ -28,92 +32,45 @@
         var ym = div1.offsetHeight;
         canvas1.width = xm;
         canvas1.height = ym;
-        ctx.translate(xm/2,ym/2);
-        var r = Math.min(xm,ym)/2;
+        ctx.translate(xm / 2, ym / 2);
+        var r = Math.min(xm, ym) / 2;
         var myDate = new Date();
-        
-       
 
-        function draw1(){
+        function draw1() {
             myDate = new Date();
             console.log(myDate);
-            ctx.clearRect(-canvas1.width/2,-canvas1.height/2,canvas1.width,canvas1.height);
-            
-            //ctx.beginPath();
-            //ctx.lineWidth="6";
-            //ctx.strokeStyle="#000";
-            //ctx.arc(0,0,r,0,Math.PI*2,true);
-            //ctx.stroke();
-            drawc(0,0,"#AAAAAA",r,"6",false,"","");
-
-            //ctx.beginPath();
-            //ctx.lineWidth="1";
-            //ctx.strokeStyle="#f00";
-            //ctx.arc(0,0,r/12,0,Math.PI*2,true);
-            //ctx.fillStyle="red";
-            //ctx.fill();
-            //ctx.stroke();
-            drawc(0,0,"#AAAA33",r/12,"0",true,"#AAAA33","");
-
-            /*ctx.beginPath();
-            ctx.rotate(2*Math.PI * myDate.getSeconds() / 60);
-            ctx.strokeStyle="#000";
-            ctx.rect(-r/100,-r/1.02,r/50,r/1.02);
-            ctx.fillStyle="black";
-            ctx.fill();
-            ctx.stroke();*/
-            drawr(2*Math.PI * myDate.getSeconds() / 60,"#000",-r/100,-r/1.02,r/50,r/1.02,"black");
-
-            /*ctx.beginPath();
-            ctx.rotate(2*Math.PI * myDate.getMinutes() / 60 - 2*Math.PI * myDate.getSeconds() / 60);
-            ctx.strokeStyle="#333";
-            ctx.rect(-r/30,-r/1.2,r/15,r/1.2);
-            ctx.fillStyle="#333";
-            ctx.fill();
-            ctx.stroke();*/
-            drawr(2*Math.PI * myDate.getMinutes() / 60 - 2*Math.PI * myDate.getSeconds() / 60 + 2*Math.PI * myDate.getSeconds()/3600,"#333",-r/30,-r/1.2,r/15,r/1.2,"#333");
-            
-            /*ctx.beginPath();
-            ctx.rotate(2*Math.PI * myDate.getHours() / 12 - 2*Math.PI * myDate.getMinutes() / 60);
-            ctx.strokeStyle="#666";
-            ctx.rect(-r/20,-r/3,r/10,r/3);
-            ctx.fillStyle="#666";
-            ctx.fill();
-            ctx.stroke();*/
-            drawr(2*Math.PI * myDate.getHours() / 12 - 2*Math.PI * myDate.getMinutes() / 60 - 2*Math.PI * myDate.getSeconds()/3600 + 2*Math.PI * myDate.getSeconds()/43200 + 2*Math.PI * myDate.getMinutes() / 720,"#666",-r/20,-r/3,r/10,r/3,"#666");
-            
-            ctx.rotate(- 2*Math.PI * myDate.getHours() / 12 - 2*Math.PI * myDate.getSeconds()/43200 - 2*Math.PI * myDate.getMinutes() / 720);
+            ctx.clearRect(-canvas1.width / 2, -canvas1.height / 2, canvas1.width, canvas1.height);
+            drawc(0, 0, "#AAAAAA", r, "6", false, "", "");
+            drawc(0, 0, "#AAAA33", r / 12, "0", true, "#AAAA33", "");
+            drawr(2 * Math.PI * myDate.getSeconds() / 60, "#000", -r / 100, -r / 1.02, r / 50, r / 1.02, "black");
+            drawr(2 * Math.PI * myDate.getMinutes() / 60 - 2 * Math.PI * myDate.getSeconds() / 60 + 2 * Math.PI * myDate.getSeconds() / 3600, "#333", -r / 30, -r / 1.2, r / 15, r / 1.2, "#333");
+            drawr(2 * Math.PI * myDate.getHours() / 12 - 2 * Math.PI * myDate.getMinutes() / 60 - 2 * Math.PI * myDate.getSeconds() / 3600 + 2 * Math.PI * myDate.getSeconds() / 43200 + 2 * Math.PI * myDate.getMinutes() / 720, "#666", -r / 20, -r / 3, r / 10, r / 3, "#666");
+            ctx.rotate(- 2 * Math.PI * myDate.getHours() / 12 - 2 * Math.PI * myDate.getSeconds() / 43200 - 2 * Math.PI * myDate.getMinutes() / 720);
         }
 
-        function drawc(x0,y0,c0,r0,lw0,f0,fc0,s0){
+        function drawc(x0, y0, c0, r0, lw0, f0, fc0, s0) {
             ctx.beginPath();
-            
-            ctx.strokeStyle=c0;
-            ctx.lineWidth=lw0;
-            ctx.arc(x0,y0,r0,0,Math.PI*2,true);
-            if (f0 == true){
-                ctx.fillStyle=fc0;
+            ctx.strokeStyle = c0;
+            ctx.lineWidth = lw0;
+            ctx.arc(x0, y0, r0, 0, Math.PI * 2, true);
+            if (f0 == true) {
+                ctx.fillStyle = fc0;
                 ctx.fill();
             };
-            ctx.shadowColor=s0;
+            ctx.shadowColor = s0;
             ctx.stroke();
         }
-        
-        function drawr(rtt0,c0,l0,t0,w0,h0,f0){
+        function drawr(rtt0, c0, l0, t0, w0, h0, f0) {
             ctx.beginPath();
             ctx.rotate(rtt0);
-            ctx.strokeStyle=c0;
-            ctx.rect(l0,t0,w0,h0);
-            ctx.fillStyle=f0;
+            ctx.strokeStyle = c0;
+            ctx.rect(l0, t0, w0, h0);
+            ctx.fillStyle = f0;
             ctx.fill();
             ctx.stroke();
         }
-
-
-
-        
-        setInterval("draw1()",1000);
-
+        draw1();
+        setInterval("draw1()", 1000);
     </script>
 
 </body>
